@@ -1,0 +1,32 @@
+<%- include('../partials/header.ejs')  %>
+
+<title>CADASTRO DE INGREDIENTES - LIBRI</title>
+
+</head>
+
+<body>
+    
+    <div class="container">
+
+        <%- include('../partials/menu.ejs') %>
+
+        <div class="card mt-2">
+            <div class="card-header">CADASTRO DE INGREDIENTES</div>
+        </div>
+
+        <div class="card-body">
+            <form action="http://localhost:3000/inserirIngrediente" method="post">
+                
+                <label for="">INGREDIENTE</label>
+                <input type="text" class="form-control" 
+                        name="nome_ingrediente" id="nome_ingrediente"
+                        placeholder="DIGITE UM INGREDIENTE">
+                
+                <button class="btn btn-success mt-2">INGREDIENTES</button>
+            </form>
+        </div>
+    </div>
+
+    </body>
+
+<%- include('../partials/footer.ejs')  %>

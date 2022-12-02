@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs')  %>
+
+    <title>LISTAGEM DE INGREDIENTES - LIBRI</title>
+
+</head>
+
+<body>
+    
+    <div class="container">
+
+        <%- include('../partials/menu.ejs')  %>
+
+        <div class="card mt-2">
+            <div class="card-header">LISTAGEM DE INGREDIENTES</div>
+        </div>
+
+        <%
+            ingrediente.forEach(ingrediente=>{
+        %>
+
+            <div class="card mt-2">
+
+                <div class="card-body">
+                    <%= ingrediente.nome_ingrediente %>
+                </div>
+
+                <a href="/formEdicaoIngrediente/<%= ingrediente.id %>" class="btn btn-success mt-1">EDITAR</a>
+                <a href="/excluirIngrediente/<%= ingrediente.id %>" class="btn btn-danger mt-1">EXCLUIR</a>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</body>
+
+<%- include('../partials/footer.ejs')  %>

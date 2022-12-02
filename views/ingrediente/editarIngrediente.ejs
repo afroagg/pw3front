@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs')  %>
+
+<title>EDIÇÃO DE INGREDIENTES - LIBRI</title>
+
+</head>
+
+<body>
+    
+    <div class="container">
+
+        <%- include('../partials/menu.ejs') %>
+
+        <div class="card mt-2">
+            <div class="card-header">EDIÇÃO DE INGREDIENTES</div>
+        </div>
+
+        <div class="card-body">
+            <form action="http://localhost:3001/alterarIngrediente" method="post">
+                
+                <label for="">INGREDIENTE</label>
+
+                <input
+                    type="hidden"
+                    name="id" id="id"
+                    value="<%= ingrediente.id %>"/>
+
+                <input type="text" class="form-control" 
+                        name="nome_ingrediente" id="nome_ingrediente"
+                        placeholder="DIGITE UM INGREDIENTE"
+                        value="<%= ingrediente.nome_ingrediente %>">
+                
+                <button class="btn btn-success mt-2">EDITAR</button>
+            </form>
+        </div>
+    </div>
+
+    </body>
+
+<%- include('../partials/footer.ejs')  %>
