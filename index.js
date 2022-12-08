@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 
 const app = express();
@@ -14,6 +15,28 @@ app.set('view engine', 'ejs');
 //ROTA DE CADASTRO DE CATEGORIAS
 app.get('/cadastroIngrediente', (req, res)=>{
     res.render('ingrediente/index');
+});
+
+// RENDERIZAÇÃO DE FORMULARIO DE CADASTRO
+app.post('/cadastroIngrediente', (req, res)=>{
+
+    const urlcadastrarIngrediente = 'http://localhost:3000/inserirIngrediente';
+    console.log(req.body);
+
+    axios.post(urlcadastrarIngrediente, req.body)
+    .then(
+        (response)=> {
+            const urlListagemIngrediente = 'http://localhost:3000/listarIngrediente';
+            axios.get(urlListagemIngrediente)
+            .then(
+                (response) =>{
+                    let ingrediente = response.data;
+                    res.render('ingrediente/listagemIngrediente', {ingrediente});
+                }
+            )
+        }
+    )
+
 });
 
 //ROTA DE LISTAGEM DE CATEGORIAS
@@ -66,7 +89,16 @@ app.get('/listagemIngrediente', (req, res)=>{
 
         axios.put(urlAlterarIngrediente, req.body)
         .then(
-            res.send('ALTERADO!')
+            (response)=> {
+                const urlListagemIngrediente = 'http://localhost:3000/listarIngrediente';
+                axios.get(urlListagemIngrediente)
+                .then(
+                    (response) =>{
+                        let ingrediente = response.data;
+                        res.render('ingrediente/listagemIngrediente', {ingrediente});
+                    }
+                )
+            }
         )
 
     });
@@ -82,24 +114,21 @@ app.get('/excluirIngrediente/:id',(req, res)=>{
     let {id} = req.params;
 
     const urlDeletarIngrediente = `http://localhost:3000/excluirIngrediente/${id}`;
-    const urlListagemIngrediente = 'http://localhost:3000/listarIngrediente';
+   
 
-    axios.delete(urlDeletarIngrediente, req.body)
+    axios.delete(urlDeletarIngrediente, req.params)
     .then(
-
-        res.send('fuck!')
-
-        // axios.get(urlListagemIngrediente)
-        //     .then(
-        //         (response)=>{
-        //             // console.log(response.data);
-        //             // res.send(response.data);
-        //             let ingrediente = response.data;
-                    // res.send('fuck!');
-        //             // res.render('ingrediente/listagemIngrediente', {ingrediente});
-    
-            // })
-
-)});
+        (response)=> {
+            const urlListagemIngrediente = 'http://localhost:3000/listarIngrediente';
+            axios.get(urlListagemIngrediente)
+            .then(
+                (response) =>{
+                    let ingrediente = response.data;
+                    res.render('ingrediente/listagemIngrediente', {ingrediente});
+                }
+            )
+        }
+    )
+});
 
 
